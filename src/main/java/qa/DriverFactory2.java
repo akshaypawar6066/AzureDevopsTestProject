@@ -6,24 +6,26 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class DriverFactory {
+public class DriverFactory2 {
 
-	static WebDriver driver;
+	WebDriver driver;
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 
 	public WebDriver initBrowser(String browsername) {
 		if (browsername.equals("Chrome")) {
-			driver = new ChromeDriver();
+			tlDriver.set(new ChromeDriver());
 		}
 
 		else if (browsername.equals("edge")) {
-			driver = new FirefoxDriver();
+			tlDriver.set(new FirefoxDriver());
 		}
-		return driver;
+		return getDriver();
 
 	}
+	
 
-	public static WebDriver getDriver() {
-		return driver;
+	public static synchronized WebDriver getDriver() {
+		return tlDriver.get();
 
 	}
 

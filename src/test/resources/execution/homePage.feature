@@ -1,21 +1,24 @@
-Feature: Home Page Functionality
+Feature: Home page functionality
 
-Scenario: Validation of title
+@Demo
+Scenario: validation of title
 Given User is at landing page
-Then Verify title of the page should contains "Shopping site" 
+Then Page title should contains "Shopping"
 
-Scenario: Verify cart icon
+@Sanity
+Scenario: verify cart icon
 Given User is at landing page
-Then Cart icon should be displayed
+Then Cart icon should get displayed
 
+@Smoke
 Scenario: Checkout the deals section
 Given User is at landing page
-When user clicks on smart phones deal
+When User click on smart phones deal
 Then deal section should get open
 
-Scenario: Login tocapplication
+@Regression
+Scenario: Login to application
 Given User is at landing page
-When user clicks on signin button
-And user enters username as "8369038453" and clicks on continue button
-And user enters password as "akshay6066" and clicks on login button
-Then user should logged in successfully
+When User enters the username as "8369038453" and clicks on continue button
+And User enters the password as "akshay6066" and clicks on signIn button
+Then User should get SignedIn succesfully

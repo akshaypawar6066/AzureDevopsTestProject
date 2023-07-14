@@ -2,6 +2,7 @@ package pages;
 
 import java.time.Duration;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,32 +15,36 @@ public class HomePage {
 	public WebDriver driver;
 	WebDriverWait wait;
 
-	@FindBy(xpath = "//*[@id='nav-cart']")
-	WebElement cartIcon;
+	@FindBy(xpath = "//*[@id='nav-cart']123")
+	private WebElement cartIcon;
 
 	@FindBy(xpath = "(//*[@class='a-carousel-card']//img[@alt = 'op'])[1]")
-	WebElement smartPhoneCarousel;
+	private WebElement smartPhoneCarousel;
 
 	@FindBy(xpath = "(//*[@role='presentation'])[1]")
-	WebElement smartPhones;
+	private WebElement smartPhones;
 
 	@FindBy(xpath = "//*[@id='nav-link-accountList']")
-	WebElement signInHover;
+	private WebElement signInHover;
 
 	@FindBy(xpath = "//*[@id='nav-flyout-ya-signin']//a[@class = 'nav-action-signin-button']")
-	WebElement signInButton;
+	private WebElement signInButton;
 
-	@FindBy(xpath = "//*[@id='ap_email']")
-	WebElement emailField;
+	@FindBy(xpath = "//input[@id='ap_email']")
+	private WebElement emailField;
 
 	@FindBy(xpath = "//input[@id='continue']")
-	WebElement continueButton;
+	private WebElement continueButton;
 
 	@FindBy(xpath = "//input[@id='ap_password']")
-	WebElement passwordField;
+	private WebElement passwordField;
 
 	@FindBy(xpath = "//input[@id='signInSubmit']")
-	WebElement finalSignIn;
+	private WebElement finalSignIn;
+	
+	
+	@FindBy(xpath = "//span[@id='nav-link-accountList-nav-line-1']")
+	private WebElement loggedInUser;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -52,14 +57,15 @@ public class HomePage {
 		return titleOfPage;
 	}
 
-	public boolean isCradIconDisplayed() {
+	public boolean isCratIconDisplayed() {
 		boolean isDisplyed = cartIcon.isDisplayed();
 		return isDisplyed;
 	}
 
 	public void enterDealsSection() {
 		wait.until(ExpectedConditions.visibilityOf(smartPhoneCarousel));
-		smartPhoneCarousel.click();
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", smartPhoneCarousel);
 	}
 
 	public boolean carouselNavigation() {
@@ -73,19 +79,27 @@ public class HomePage {
 	public void clickOnSignInButton()
 	{
 		Actions act=new Actions(driver);
-		act.moveToElement(signInHover).moveToElement(signInButton).build().perform();
+		act.moveToElement(signInHover).moveToElement(signInButton).click().build().perform();
 	}
 	
 	public void enterUsername(String username)
 	{
+		wait.until(ExpectedConditions.visibilityOf(emailField));
 		emailField.sendKeys(username);
 		continueButton.click();
 	}
 	
 	public void enterPassword(String password)
 	{
-		emailField.sendKeys(password);
+		wait.until(ExpectedConditions.visibilityOf(passwordField));
+		passwordField.sendKeys(password);
 		finalSignIn.click();
+	}
+	
+	public String checkUserIsAbleToSignIn()
+	{
+		wait.until(ExpectedConditions.visibilityOf(loggedInUser));
+		return loggedInUser.getText();
 	}
 
 }
