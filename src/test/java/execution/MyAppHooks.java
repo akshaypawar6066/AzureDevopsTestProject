@@ -15,7 +15,7 @@ import qa.DriverFactory;
 import qa.DriverFactory2;
 
 public class MyAppHooks {
-	DriverFactory2 df;
+	DriverFactory df;
 	WebDriver driver;
 	
 	@Before
@@ -34,7 +34,7 @@ public class MyAppHooks {
 			 browserName=mavenBrowser;
 		 }
 		 
-		 df=new DriverFactory2();
+		 df=new DriverFactory();
 		 driver=df.initBrowser(browserName);
 		 driver.manage().window().maximize();
 	}

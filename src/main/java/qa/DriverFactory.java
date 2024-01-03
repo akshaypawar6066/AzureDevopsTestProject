@@ -12,10 +12,12 @@ public class DriverFactory {
 
 	public WebDriver initBrowser(String browsername) {
 		if (browsername.equals("Chrome")) {
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		}
 
 		else if (browsername.equals("edge")) {
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
 		return driver;

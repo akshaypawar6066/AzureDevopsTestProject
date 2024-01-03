@@ -9,10 +9,12 @@ import io.cucumber.testng.CucumberOptions;
 		features = {"src\\test\\resources\\execution"},
 		glue= {"execution"},
 		plugin = {"pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		publish = true
+		publish = true,
+		tags = "@Smoke"
+		
 		)
 public class AmazonRunner extends AbstractTestNGCucumberTests {
-  @DataProvider(parallel = true)
+  @DataProvider()
   public Object[][] scenarios()
   {
 	 return super.scenarios();

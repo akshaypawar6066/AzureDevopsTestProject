@@ -12,11 +12,11 @@ import pages.HomePage;
 
 public class HomePageSteps {
 	WebDriver driver;
-	HomePage homePage=new HomePage(DriverFactory2.getDriver());
+	HomePage homePage=new HomePage(DriverFactory.getDriver());
 	
 	@Given("User is at landing page")
-	public void user_is_at_landing_page() {
-	 driver= DriverFactory2.getDriver();
+	public void user_is_at_landing_page() throws InterruptedException {
+	 driver= DriverFactory.getDriver();
 	 driver.get("https://www.amazon.in/"); 
 	}
 
