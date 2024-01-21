@@ -10,7 +10,6 @@ Scenario: verify cart icon
 Given User is at landing page
 Then Cart icon should get displayed
 
-
 Scenario: Checkout the deals section
 Given User is at landing page
 When User click on smart phones deal
